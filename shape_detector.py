@@ -1,3 +1,29 @@
+# ============================================================================
+# shape_detector.py - webcam vision demo: finds shapes (triangle, square,
+# ring, blimp), names their color (red/blue/black), estimates how far away
+# they are, and plots them on a little top-down "radar" map.
+#
+# HOW IT WORKS, IN PLAIN WORDS:
+#   1. Each webcam frame is blurred and its edges are found (Canny edge
+#      detection = "keep only the outlines").
+#   2. Each outline is simplified to a polygon. Three corners = triangle,
+#      four roughly-equal sides = square, round enough = ring (or blimp,
+#      if it is huge and blue).
+#   3. The average color inside the outline names the color.
+#   4. Distance is estimated from apparent size: a thing of known real-world
+#      width looks smaller the farther away it is
+#      (Distance = RealWidth x FocalLength / PixelWidth).
+#
+# TUNING: a "Settings" window opens with sliders (minimum size, edge
+# sensitivity, roundness strictness) so you can tune detection live.
+# The color ranges and size constants are at the top of the file.
+#
+# RUN IT WITH:  python shape_detector.py   (needs opencv-python and numpy)
+# Note: the distance numbers are rough - FOCAL_LENGTH below is a guess for
+# a typical webcam, not a measured calibration. (Reasoned from the code,
+# not re-tested.)
+# ============================================================================
+
 import cv2
 import numpy as np
 

@@ -1,3 +1,19 @@
+# ============================================================================
+# face_mesh_generator.py - webcam demo that draws the classic 68-point face
+# mesh (jaw, eyebrows, nose, eyes, mouth) over your face live.
+#
+# HOW IT WORKS, IN PLAIN WORDS: two older OpenCV tools team up. First a
+# "Haar cascade" (a fast, old-school face finder built into OpenCV) says
+# WHERE the faces are; then the LBF facemark model (lbfmodel.yaml, must sit
+# next to this file) pins 68 landmarks onto each found face. The numbered
+# map of those points is in the comments below.
+#
+# RUN IT WITH:  python face_mesh_generator.py
+# Needs: opencv-python with the contrib modules (pip install
+# opencv-contrib-python) - plain opencv-python does not include cv2.face.
+# (Reasoned from the code, not re-tested.)
+# ============================================================================
+
 import cv2
 import numpy as np
 
